@@ -13,40 +13,37 @@ $( document ).ready(function() {
 	L.control.layers(baseMaps).addTo(map);
 	baseMaps.StreetView.addTo(map);
 
-	const next = u('.next');
-	const prev = u('.prev');
-	const slide1 = u('.banner li:nth-child(1)');
-	const slide2 = u('.banner li:nth-child(2)');
-	const slide3 = u('.banner li:nth-child(3)');
+	const prevBtn = document.querySelector('.prev');
+	const nextBtn = document.querySelector('.next');
 
-	function nextSlide() {
-		if(slide1.hasClass('active')) {
-			slide1.toggleClass('active');
-			slide2.toggleClass('active');
-		} else if (slide2.hasClass('active')) {
-			slide2.toggleClass('active');
-			slide3.toggleClass('active');
-		} else {
-			slide3.toggleClass('active');
-			slide1.toggleClass('active');
+	const slides = document.querySelectorAll('.banner li');
+	let currentSlide = 0;
+	
+	prevBtn.addEventListener('click', function() {
+		currentSlide--
+		if (currentSlide < 0) {
+			currentSlide = slides.length -1;
 		}
-	}
 
-	function prevSlide() {
-		if(slide1.hasClass('active')) {
-			slide1.toggleClass('active');
-			slide3.toggleClass('active');
-		} else if (slide2.hasClass('active')) {
-			slide2.toggleClass('active');
-			slide1.toggleClass('active');
-		} else {
-			slide3.toggleClass('active');
-			slide2.toggleClass('active');
+		showSlide(currentSlide);
+	});
+	
+	nextBtn.addEventListener('click', function() {
+		currentSlide++
+		if (currentSlide > slides.length -1) {
+			currentSlide = 0;
 		}
-	}
 
-	next.on('click', nextSlide);
-	prev.on('click', prevSlide);
+		showSlide(currentSlide);
+	});
+
+	function showSlide(slide) {
+		slides.forEach((slide) => {
+		  slide.classList.remove('active');
+		});
+	  
+		slides[slide].classList.add('active');
+	  }
 	
 function nav(){
 	

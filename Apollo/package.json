@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "leaflet": "^1.9.4",
-    "umbrellajs": "^3.3.1"
+    "leaflet": "^1.9.4"
   }
 }
